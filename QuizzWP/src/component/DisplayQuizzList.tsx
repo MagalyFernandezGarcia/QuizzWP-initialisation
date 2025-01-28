@@ -25,11 +25,11 @@ const DisplayQuizzList = () => {
 
   const displayQUizz = quizzList.map((quizz : QuizzList) => {
     return(<>
-      <h1>{quizz.title.rendered}</h1>
+      <a key={quizz.id}>{quizz.title.rendered}</a>
     </>)
       
   })
-  console.log(quizzList);
+  
   
 
   return (

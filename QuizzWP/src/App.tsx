@@ -1,6 +1,7 @@
 
 import './App.css'
 import DisplayArticleList from './component/DisplayQuizzList'
+import PlayQuizz from './component/PlayQuizz'
 
 function App() {
   
@@ -8,6 +9,7 @@ function App() {
   return (
     <>
      <DisplayArticleList />
+     {/* <PlayQuizz quizzId={25}/> */}
     </>
   )
 }

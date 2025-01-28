@@ -14,3 +14,16 @@ export async function fetchQuizzList(nbElements : number, page =1):Promise<Quizz
     return result;
     
 }
+
+
+export async function fetchQuizzByID(quizzId : number):Promise<number[]>{
+
+    const selectedQuizz = await fetch("http://" + VITE_URL_WP + "wp/v2/testquizz/"+ quizzId);
+    const jsonQuizz :QuizzList = await selectedQuizz.json();
+
+    const result = jsonQuizz.questions
+    
+   
+    return result;
+    
+}
