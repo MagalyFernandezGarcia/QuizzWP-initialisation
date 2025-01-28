@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import "./App.css";
-import DisplayQuizzList from "./component/DisplayQuizzList";
+import DisplayQuizzList from "./component/DisplayQuizz/DisplayQuizzList";
 import PlayQuizz from "./component/PlayQuizz";
 import { useState } from "react";
 

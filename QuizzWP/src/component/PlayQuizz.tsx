@@ -1,17 +1,16 @@
 import { useEffect, useState } from "react";
 import { fetchQuestionsByID } from "../services/questionsService";
 import { QuestionsByID } from "../types/questions";
-import { QuizzList } from "../types/quizz";
 import { fetchQuizzByID } from "../services/quizzlistService";
-import { redirect, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import FuzzballMatcher from "./FuzzballMatcher";
 
 const PlayQuizz = ({ quizzId }: { quizzId: number }) => {
   const [questionsList, setQuestionsList] = useState<QuestionsByID[]>([]);
   const [currentQuestion, setCurrentQuestion] = useState(0);
 
-  console.log("quizzId", quizzId);
-  let navigate = useNavigate();
   
+  let navigate = useNavigate();
 
   useEffect(() => {
     let ignore = false;
@@ -36,19 +35,15 @@ const PlayQuizz = ({ quizzId }: { quizzId: number }) => {
     };
   }, [quizzId]);
 
- 
-
   if (questionsList.length > 0) {
-    return <section>{questionsList[currentQuestion].name} {
+    return (
+      <section>
+        <p>{questionsList[currentQuestion].name}</p>
+        <FuzzballMatcher answer={questionsList[currentQuestion].reponse_}/>
         
-    }</section>
-    
+      </section>
+    );
   }
-
-  
-  
-
-  
 };
 
 export default PlayQuizz;
