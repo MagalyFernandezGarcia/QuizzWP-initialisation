@@ -3,7 +3,7 @@ import { fetchQuizzList } from "../services/quizzlistService";
 import { QuizzList } from "../types/quizz";
 
 const nbQuizzPerRequest = 10;
-const DisplayQuizzList = () => {
+const DisplayQuizzList = ({setQuizzId} : {setQuizzId : React.Dispatch<React.SetStateAction<number>>}) => {
   const [quizzList, setQuizzList] = useState<QuizzList[]>([]);
 
   const [currentPage, setCurrentPage] = useState(1);

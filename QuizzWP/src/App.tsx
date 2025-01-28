@@ -1,17 +1,28 @@
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
-import './App.css'
-import DisplayArticleList from './component/DisplayQuizzList'
-import PlayQuizz from './component/PlayQuizz'
+import "./App.css";
+import DisplayQuizzList from "./component/DisplayQuizzList";
+import PlayQuizz from "./component/PlayQuizz";
+import { useState } from "react";
 
-function App() {
-  
-
+const App = () => {
+  const [quizzId, setQuizzId] = useState(0);
   return (
-    <>
-     <DisplayArticleList />
-     {/* <PlayQuizz quizzId={25}/> */}
-    </>
-  )
-}
+    <Routes>
+      <Route path="/" element={<DisplayQuizzList setQuizzId={setQuizzId} />} />
+      <Route path="/quizz/:id" element={<PlayQuizz quizzId={quizzId} />} />
+    </Routes>
+  );
+};
 
-export default App
+// function App() {
+
+//   return (
+//     <>
+//      <DisplayQuizzList />
+//      <PlayQuizz quizzId={25}/>
+//     </>
+//   )
+// }
+
+export default App;
