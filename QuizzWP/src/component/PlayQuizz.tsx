@@ -35,10 +35,13 @@ const PlayQuizz = ({ quizzId }: { quizzId: number }) => {
     };
   }, [quizzId]);
 
+  const question = questionsList[currentQuestion];
+
   if (questionsList.length > 0) {
     return (
       <section>
-        <p>{questionsList[currentQuestion].name}</p>
+        <p>{question.name}</p>
+        {question.propositions ? question.propositions.split(",") : ""}
         <FuzzballMatcher answer={questionsList[currentQuestion].reponse_}/>
         
       </section>

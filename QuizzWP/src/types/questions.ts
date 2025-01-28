@@ -11,6 +11,7 @@ export type QuestionsByID = {
     titre_de_la_question: string
     reponse_: string
     quizz: string
+    propositions: string
     _links: {
       self: Array<{
         href: string
