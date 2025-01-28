@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { fetchQuizzList } from "../services/quizzlistService";
 import { QuizzList } from "../types/quizz";
+import { Link, redirect } from "react-router-dom";
 
 const nbQuizzPerRequest = 10;
 const DisplayQuizzList = ({setQuizzId} : {setQuizzId : React.Dispatch<React.SetStateAction<number>>}) => {
@@ -23,10 +24,23 @@ const DisplayQuizzList = ({setQuizzId} : {setQuizzId : React.Dispatch<React.SetS
     };
   }, [currentPage]);
 
+  const letsPlay = (id : number) => {
+    setQuizzId(id)
+    
+    
+
+  }
+
   const displayQUizz = quizzList.map((quizz : QuizzList) => {
     return(<>
-      <a key={quizz.id}>{quizz.title.rendered}</a>
-    </>)
+      <div key={quizz.id}>
+        <p>{quizz.title.rendered}</p>
+
+      <button onClick={() => letsPlay(quizz.id)} > <Link to={`/quizz/${quizz.id}`}  >Jouer</Link></button>
+      </div>
+      <button onClick={() => setCurrentPage(currentPage + 1)}>Voir plus</button>
+      </>
+    )
       
   })
   
