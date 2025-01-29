@@ -18,12 +18,16 @@ export async function fetchQuizzList(nbElements : number, page =1):Promise<Quizz
 
 export async function fetchQuizzByID(quizzId : number):Promise<number[]>{
 
+    const result : number[] = []
+
     const selectedQuizz = await fetch("http://" + VITE_URL_WP + "wp/v2/testquizz/"+ quizzId);
     const jsonQuizz :QuizzList = await selectedQuizz.json();
 
-    const result = jsonQuizz.questions
+    jsonQuizz.questions_du_quizz.forEach(question => result.push(question.ID));
     
+   console.log(result);
    
-    return result;
+   
+    return result
     
 }

@@ -37,12 +37,16 @@ const PlayQuizz = ({ quizzId }: { quizzId: number }) => {
 
   const question = questionsList[currentQuestion];
 
+   
+  
+
   if (questionsList.length > 0) {
     return (
       <section>
-        <p>{question.name}</p>
-        {question.propositions ? question.propositions.split(",") : ""}
-        <FuzzballMatcher answer={questionsList[currentQuestion].reponse_}/>
+        <p>{question.titre_de_la_question}</p>
+        {question.propositions && question.propositions.map(proposition => <p key={proposition}>{proposition}</p>)}
+        
+        <FuzzballMatcher answer={questionsList[currentQuestion].reponse_} accept={questionsList[currentQuestion].variation_acceptee} onSetNext={() => setCurrentQuestion(currentQuestion + 1)}/>
         
       </section>
     );
