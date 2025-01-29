@@ -1,16 +1,21 @@
 import * as fuzzball from "fuzzball";
 import { useState } from "react";
 
+
 const FuzzballMatcher = ({
   answer,
   accept,
   onSetNext,
   proposition,
+  onSetScore,
+  onSetNbrQuestions
 }: {
   answer: string;
   accept: string;
   onSetNext: () => void;
   proposition: string[];
+  onSetScore : () => void;
+  onSetNbrQuestions : () => void
 }) => {
   const [guess, setGuess] = useState("");
   const [result, setResult] = useState<{
@@ -23,6 +28,8 @@ const FuzzballMatcher = ({
     answer: answer,
     accept: accept,
   };
+
+ 
 
   const handleMatch = (guessParam: string) => {
     const scores = Object.entries(acceptedAnswers).map(([key, value]) => {
@@ -38,11 +45,16 @@ const FuzzballMatcher = ({
 
     const isMatch = bestMatch.score >= 80;
 
+    if (isMatch) {
+      onSetScore();
+    }
+
     setResult({
       answer,
       score: bestMatch.score,
       isMatch: isMatch,
     });
+    onSetNbrQuestions();
   };
   const handleChoice = (guess: string) => {
     setGuess(guess);
@@ -53,7 +65,6 @@ const FuzzballMatcher = ({
     setResult(null);
     onSetNext();
   };
-  
 
   if (proposition.length > 2) {
     return (

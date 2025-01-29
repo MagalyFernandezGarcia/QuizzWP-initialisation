@@ -5,10 +5,13 @@ import { fetchQuizzByID } from "../../services/quizzlistService";
 import { useNavigate } from "react-router-dom";
 import FuzzballMatcher from "../FuzzballMatcher";
 import "./playQuizz.css"
+import ScoreBoard from "../../component/ScoreBoard";
 
 const PlayQuizz = ({ quizzId }: { quizzId: number }) => {
   const [questionsList, setQuestionsList] = useState<QuestionsByID[]>([]);
   const [currentQuestion, setCurrentQuestion] = useState(0);
+  const [score, setScore] = useState(0);
+  const [nbrQuestions, setNbrQuestions] = useState(0);
 
   let navigate = useNavigate();
 
@@ -34,10 +37,18 @@ const PlayQuizz = ({ quizzId }: { quizzId: number }) => {
       ignore = true;
     };
   }, [quizzId]);
+  console.log(questionsList.length);
+  
 
   const question = questionsList[currentQuestion];
 
-  if (questionsList.length > 0) {
+  if(nbrQuestions === questionsList.length ) {
+    console.log("score");
+    
+    return <ScoreBoard score={score} nbrQuestions={nbrQuestions}/>
+  }
+
+  if (questionsList.length > 0 && nbrQuestions !== questionsList.length  ) {
     
     return (
       <section>
@@ -50,10 +61,16 @@ const PlayQuizz = ({ quizzId }: { quizzId: number }) => {
           accept={questionsList[currentQuestion].variation_acceptee}
           onSetNext={() => setCurrentQuestion(currentQuestion + 1)}
           proposition={question.propositions}
+          onSetScore={() => setScore(score + 1)}
+          onSetNbrQuestions={() => setNbrQuestions(nbrQuestions + 1)}
         />
       </section>
     );
   }
+
+  
+
+
 };
 
 export default PlayQuizz;
