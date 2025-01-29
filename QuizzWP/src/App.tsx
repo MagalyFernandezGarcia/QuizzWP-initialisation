@@ -2,7 +2,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import "./App.css";
 import DisplayQuizzList from "./component/DisplayQuizz/DisplayQuizzList";
-import PlayQuizz from "./container/PlayQuizz";
+import PlayQuizz from "./container/playQuizz/PlayQuizz";
 import { useState } from "react";
 
 const App = () => {
@@ -15,14 +15,6 @@ const App = () => {
   );
 };
 
-// function App() {
 
-//   return (
-//     <>
-//      <DisplayQuizzList />
-//      <PlayQuizz quizzId={25}/>
-//     </>
-//   )
-// }
 
 export default App;

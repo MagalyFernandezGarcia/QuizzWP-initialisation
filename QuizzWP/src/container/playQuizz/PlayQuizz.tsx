@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
-import { fetchQuestionsByID } from "../services/questionsService";
-import { QuestionsByID } from "../types/questions";
-import { fetchQuizzByID } from "../services/quizzlistService";
+import { fetchQuestionsByID } from "../../services/questionsService";
+import { QuestionsByID } from "../../types/questions";
+import { fetchQuizzByID } from "../../services/quizzlistService";
 import { useNavigate } from "react-router-dom";
-import FuzzballMatcher from "./FuzzballMatcher";
+import FuzzballMatcher from "../FuzzballMatcher";
+import "./playQuizz.css"
 
 const PlayQuizz = ({ quizzId }: { quizzId: number }) => {
   const [questionsList, setQuestionsList] = useState<QuestionsByID[]>([]);
@@ -41,6 +42,7 @@ const PlayQuizz = ({ quizzId }: { quizzId: number }) => {
     return (
       <section>
         <p>{question.titre_de_la_question}</p>
+        {question.image && <img src={question.image.guid} alt="personnage" className="img" />}
         
 
         <FuzzballMatcher

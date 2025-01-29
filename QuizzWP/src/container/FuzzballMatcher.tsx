@@ -94,7 +94,7 @@ const FuzzballMatcher = ({
           <p>Pourcentage: {result.score}%</p>
           <p>{result.isMatch ? "Yay, tu as trouvé !" : "Bouh ! t'es nul !"}</p>
 
-          <button onClick={() => onSetNext()}>Suivant</button>
+          <button onClick={() => handleNext()}>Suivant</button>
         </div>
       )}
     </section>
