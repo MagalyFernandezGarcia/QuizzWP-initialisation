@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Routes, Route } from "react-router-dom";
 
 import "./App.css";
 import DisplayQuizzList from "./component/DisplayQuizz/DisplayQuizzList";
