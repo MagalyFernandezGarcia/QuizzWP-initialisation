@@ -12,6 +12,7 @@ const PlayQuizz = ({ quizzId }: { quizzId: number }) => {
 	const [currentQuestion, setCurrentQuestion] = useState(0);
 	const [score, setScore] = useState(0);
 	const [nbrQuestions, setNbrQuestions] = useState(0);
+	const [timer, setTimer] = useState(0);
 
 	let navigate = useNavigate();
 
@@ -36,14 +37,13 @@ const PlayQuizz = ({ quizzId }: { quizzId: number }) => {
 			ignore = true;
 		};
 	}, [quizzId]);
-	console.log(questionsList.length);
 
 	const question = questionsList[currentQuestion];
 
 	if (nbrQuestions === questionsList.length) {
-		console.log("score");
-
-		return <ScoreBoard score={score} nbrQuestions={nbrQuestions} />;
+		return (
+			<ScoreBoard score={score} nbrQuestions={nbrQuestions} timer={timer} />
+		);
 	}
 
 	if (questionsList.length > 0 && nbrQuestions !== questionsList.length) {
@@ -61,6 +61,8 @@ const PlayQuizz = ({ quizzId }: { quizzId: number }) => {
 					proposition={question.propositions}
 					onSetScore={() => setScore(score + 1)}
 					onSetNbrQuestions={() => setNbrQuestions(nbrQuestions + 1)}
+					timer={timer}
+					onSetTimer={setTimer}
 				/>
 			</section>
 		);

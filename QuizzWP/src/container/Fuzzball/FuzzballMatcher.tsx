@@ -1,5 +1,5 @@
 import * as fuzzball from "fuzzball";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import "./fuzzballMatcher.css";
 
 const FuzzballMatcher = ({
@@ -9,6 +9,8 @@ const FuzzballMatcher = ({
 	proposition,
 	onSetScore,
 	onSetNbrQuestions,
+	timer,
+	onSetTimer,
 }: {
 	answer: string;
 	accept: string;
@@ -16,6 +18,8 @@ const FuzzballMatcher = ({
 	proposition: string[];
 	onSetScore: () => void;
 	onSetNbrQuestions: () => void;
+	timer: number;
+	onSetTimer: React.Dispatch<React.SetStateAction<number>>;
 }) => {
 	const [guess, setGuess] = useState("");
 	const [result, setResult] = useState<{
@@ -28,6 +32,19 @@ const FuzzballMatcher = ({
 		answer: answer,
 		accept: accept,
 	};
+	const interval = useRef<number | null>(null);
+
+	useEffect(() => {
+		interval.current = setInterval(() => {
+			onSetTimer((timer) => timer + 1);
+		}, 1000);
+
+		return () => {
+			if (interval.current !== null) {
+				clearInterval(interval.current);
+			}
+		};
+	}, []);
 
 	const handleMatch = (guessParam: string) => {
 		const scores = Object.entries(acceptedAnswers).map(([key, value]) => {
@@ -67,6 +84,7 @@ const FuzzballMatcher = ({
 	if (proposition.length > 2) {
 		return (
 			<>
+				<div className="timer">{timer}</div>
 				<section className="choiceContainer">
 					{proposition.map((proposition, index) => (
 						<button
@@ -107,41 +125,44 @@ const FuzzballMatcher = ({
 	}
 
 	return (
-		<section className="container">
-			<input
-				className="fuzzInput"
-				type="text"
-				onChange={(e) => setGuess(e.target.value)}
-				placeholder="Entrez votre réponse"
-			/>
-			{!result && (
-				<button className="fuzzBtn" onClick={() => handleMatch(guess)}>
-					Valider
-				</button>
-			)}
-			{result && (
-				<div className="result">
-					{result.isMatch ? (
-						<img
-							className="flamingo"
-							src="/happyFlamingo.png"
-							alt="Happy Flamingo"
-						/>
-					) : (
-						<img
-							className="flamingo"
-							src="/sadFlamingo.png"
-							alt="Crying Flamingo"
-						/>
-					)}
-					<p>La réponse était : {result.answer}</p>
-
-					<button className="fuzzBtn" onClick={() => handleNext()}>
-						Suivant
+		<>
+			<div className="timer">{timer}</div>
+			<section className="container">
+				<input
+					className="fuzzInput"
+					type="text"
+					onChange={(e) => setGuess(e.target.value)}
+					placeholder="Entrez votre réponse"
+				/>
+				{!result && (
+					<button className="fuzzBtn" onClick={() => handleMatch(guess)}>
+						Valider
 					</button>
-				</div>
-			)}
-		</section>
+				)}
+				{result && (
+					<div className="result">
+						{result.isMatch ? (
+							<img
+								className="flamingo"
+								src="/happyFlamingo.png"
+								alt="Happy Flamingo"
+							/>
+						) : (
+							<img
+								className="flamingo"
+								src="/sadFlamingo.png"
+								alt="Crying Flamingo"
+							/>
+						)}
+						<p>La réponse était : {result.answer}</p>
+
+						<button className="fuzzBtn" onClick={() => handleNext()}>
+							Suivant
+						</button>
+					</div>
+				)}
+			</section>
+		</>
 	);
 };
 
