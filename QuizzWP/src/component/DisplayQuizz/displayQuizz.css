@@ -1,7 +1,50 @@
-.quizzImage{
-    
-    height: 200px;
-    border-radius: 50%;
-    display: block;
-    margin: 0 auto;
+.quizzImage {
+	height: 200px;
+	border-radius: 50%;
+	display: block;
+	margin: 0 auto;
+}
+
+.quizzContainer {
+	border: solid 1px black;
+	border-radius: 20px;
+	padding: 10px;
+	/* background-color: #b8dcff; */
+	background-image: linear-gradient(180deg, #fc6569 0%, #f965fc 100%);
+	color: black;
+	min-width: 400px;
+	box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.quizzListContainer {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 10px;
+}
+
+.moreBtn {
+	margin-top: 20px;
+	color: #a7570d;
+}
+
+.title {
+	font-weight: bold;
+	font-size: large;
+}
+
+.logo {
+	height: 200px;
+	width: 250px;
+}
+
+.containerList {
+	display: flex;
+	flex-direction: column;
+	gap: 60px;
+	align-items: center;
+}
+
+.listTitle {
+	color: #fc65b4;
+	text-shadow: 1px 1px 1px #fec3e1;
 }

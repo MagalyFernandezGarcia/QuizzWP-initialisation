@@ -1,0 +1,14 @@
+.logCard {
+	display: flex;
+	flex-direction: column;
+	border: solid 1px black;
+	padding: 40px;
+	border-radius: 10px;
+	background-image: linear-gradient(180deg, #fc6569 0%, #f965fc 100%);
+}
+
+.form {
+	display: flex;
+	flex-direction: column;
+	gap: 24px;
+}

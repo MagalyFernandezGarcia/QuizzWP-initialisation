@@ -1,0 +1,39 @@
+.container {
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+	align-items: center;
+}
+
+.fuzzBtn {
+	width: fit-content;
+	color: #a7570d;
+	height: fit-content;
+	justify-self: center;
+	align-self: center;
+}
+
+.fuzzInput {
+	width: 90%;
+}
+
+.choiceContainer {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	grid-template-rows: 1fr 1fr;
+	grid-template-areas:
+		"A B"
+		"C D";
+	height: 160px;
+}
+
+.result {
+	color: black;
+	display: flex;
+	flex-direction: column;
+	gap: 5px;
+}
+
+.flamingo {
+	height: 100px;
+}
