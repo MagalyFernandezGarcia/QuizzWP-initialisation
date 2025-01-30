@@ -52,7 +52,6 @@ const FuzzballMatcher = ({
 			score: bestMatch.score,
 			isMatch: isMatch,
 		});
-		onSetNbrQuestions();
 	};
 	const handleChoice = (guess: string) => {
 		setGuess(guess);
@@ -61,6 +60,7 @@ const FuzzballMatcher = ({
 
 	const handleNext = () => {
 		setResult(null);
+		onSetNbrQuestions();
 		onSetNext();
 	};
 
