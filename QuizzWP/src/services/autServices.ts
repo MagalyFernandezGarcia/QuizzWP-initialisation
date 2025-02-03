@@ -20,3 +20,33 @@ export async function LoginUser(
 		throw error;
 	}
 }
+
+export async function RegisterUser(
+	username: string,
+	email: string
+): Promise<Boolean> {
+	try {
+		const response = await fetch("http://quizz.local/wp-login.php", {
+			method: "POST",
+			headers: {
+				"content-Type": "application/x-www-form-urlencoded",
+			},
+			body: JSON.stringify({
+				username,
+				email,
+			}),
+			credentials: "include",
+		});
+
+		if (!response.ok) {
+			const errorData = await response.json();
+			console.error("Erreur lors de l'inscription :", errorData);
+			return false;
+		}
+
+		return true;
+	} catch (error) {
+		console.error("Erreur lors de l'inscription", error);
+		return false;
+	}
+}

@@ -55,6 +55,9 @@ const DisplayQuizzList = ({
 
 	return (
 		<section className="containerList">
+			<button className="login fuzzBtn">
+				<Link to={"/login"}>Login</Link>
+			</button>
 			<div>
 				<img className="logo" src="/wavingFlamingo.png" alt="waving flamingo" />
 				<h2 className="listTitle">Bienvenue sur Flamingo Quizz</h2>

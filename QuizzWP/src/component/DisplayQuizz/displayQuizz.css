@@ -45,9 +45,16 @@
 	flex-direction: column;
 	gap: 60px;
 	align-items: center;
+	position: relative;
 }
 
 .listTitle {
 	color: #fc65b4;
 	text-shadow: 1px 1px 1px #fec3e1;
+}
+
+.login {
+	position: absolute;
+	top: 2px;
+	right: 20px;
 }

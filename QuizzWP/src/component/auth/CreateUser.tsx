@@ -1,11 +1,11 @@
 import { useState } from "react";
-import { LoginUser } from "../../services/autServices";
-import "./login.css";
-import { Link } from "react-router-dom";
 
-const Login = () => {
+import { RegisterUser } from "../../services/autServices";
+
+const CreateUser = () => {
 	const [username, setUsername] = useState("");
-	const [password, setPassword] = useState("");
+
+	const [email, setEmail] = useState("");
 	const [error, setError] = useState<string | null>();
 
 	const handleSubmit = async (e: React.FormEvent) => {
@@ -13,11 +13,11 @@ const Login = () => {
 		setError(null);
 
 		try {
-			const success = await LoginUser(username, password);
+			const success = await RegisterUser(username, email);
 			if (success) {
 				window.location.href = "/";
 			} else {
-				setError("identifiants incorrects");
+				setError("le compte n'est pas créé, veuillez recommencer");
 			}
 		} catch (error) {
 			setError("une erreur est survenue");
@@ -39,21 +39,21 @@ const Login = () => {
 					/>
 				</div>
 				<div>
-					<label htmlFor="password">Mot de passe : </label>
+					<label htmlFor="username">Email : </label>
 					<input
-						id="password"
-						type="password"
-						value={username}
-						onChange={(e) => setPassword(e.target.value)}
+						id="email"
+						type="mail"
+						value={email}
+						onChange={(e) => setEmail(e.target.value)}
 					/>
 				</div>
+
 				<button className="fuzzBtn" type="submit">
-					Se connecter
+					Créer le compte
 				</button>
-				<Link to={"/createUser"}>Créer un compte</Link>
 			</form>
 		</div>
 	);
 };
 
-export default Login;
+export default CreateUser;
