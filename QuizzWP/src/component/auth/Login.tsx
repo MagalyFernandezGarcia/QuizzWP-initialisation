@@ -3,7 +3,11 @@ import { LoginUser } from "../../services/autServices";
 import "./login.css";
 import { Link } from "react-router-dom";
 
-const Login = () => {
+const Login = ({
+	onSetAuth,
+}: {
+	onSetAuth: React.Dispatch<React.SetStateAction<string>>;
+}) => {
 	const [username, setUsername] = useState("");
 	const [password, setPassword] = useState("");
 	const [error, setError] = useState<string | null>();
@@ -15,6 +19,7 @@ const Login = () => {
 		try {
 			const success = await LoginUser(username, password);
 			if (success) {
+				onSetAuth(username);
 				window.location.href = "/";
 			} else {
 				setError("identifiants incorrects");
@@ -43,7 +48,7 @@ const Login = () => {
 					<input
 						id="password"
 						type="password"
-						value={username}
+						value={password}
 						onChange={(e) => setPassword(e.target.value)}
 					/>
 				</div>

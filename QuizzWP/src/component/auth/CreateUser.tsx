@@ -1,8 +1,12 @@
 import { useState } from "react";
 
-import { RegisterUser } from "../../services/autServices";
+import { registerUser } from "../../services/autServices";
 
-const CreateUser = () => {
+const CreateUser = ({
+	onSetAuth,
+}: {
+	onSetAuth: React.Dispatch<React.SetStateAction<string>>;
+}) => {
 	const [username, setUsername] = useState("");
 
 	const [email, setEmail] = useState("");
@@ -13,8 +17,9 @@ const CreateUser = () => {
 		setError(null);
 
 		try {
-			const success = await RegisterUser(username, email);
+			const success = await registerUser(username, email);
 			if (success) {
+				onSetAuth(username);
 				window.location.href = "/";
 			} else {
 				setError("le compte n'est pas créé, veuillez recommencer");

@@ -7,8 +7,10 @@ import "./displayQuizz.css";
 const nbQuizzPerRequest = 10;
 const DisplayQuizzList = ({
 	setQuizzId,
+	connected,
 }: {
 	setQuizzId: React.Dispatch<React.SetStateAction<number>>;
+	connected: string;
 }) => {
 	const [quizzList, setQuizzList] = useState<QuizzList[]>([]);
 
@@ -52,11 +54,12 @@ const DisplayQuizzList = ({
 			</div>
 		);
 	});
+	console.log(connected);
 
 	return (
 		<section className="containerList">
 			<button className="login fuzzBtn">
-				<Link to={"/login"}>Login</Link>
+				{connected ? connected : <Link to={"/login"}>Login</Link>}
 			</button>
 			<div>
 				<img className="logo" src="/wavingFlamingo.png" alt="waving flamingo" />
