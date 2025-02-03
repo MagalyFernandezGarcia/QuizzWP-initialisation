@@ -11,4 +11,7 @@
 	padding-left: 20px;
 	padding-right: 20px;
 	background-image: linear-gradient(180deg, #fc6569 0%, #f965fc 100%);
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 }

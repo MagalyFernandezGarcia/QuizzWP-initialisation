@@ -22,16 +22,19 @@ const PlayQuizz = ({ quizzId }: { quizzId: number }) => {
 			navigate("/");
 		}
 
-		fetchQuizzByID(quizzId).then((result) => {
-			result.map((question) => {
-				fetchQuestionsByID(question).then((result) => {
-					if (!ignore) {
-						return;
-					}
-					setQuestionsList((questionsList) => [...questionsList, result]);
-				});
-			});
-		});
+		const fetchData = async () => {
+			const quizz = await fetchQuizzByID(quizzId);
+			const questions = await Promise.all(
+				quizz.map(async (question) => {
+					return await fetchQuestionsByID(question);
+				})
+			);
+			if (!ignore) {
+				setQuestionsList((questionsList) => [...questionsList, ...questions]);
+			}
+		};
+
+		fetchData();
 
 		return () => {
 			ignore = true;
@@ -40,7 +43,7 @@ const PlayQuizz = ({ quizzId }: { quizzId: number }) => {
 
 	const question = questionsList[currentQuestion];
 
-	if (nbrQuestions === questionsList.length) {
+	if (nbrQuestions === questionsList.length && nbrQuestions !== 0) {
 		return (
 			<ScoreBoard score={score} nbrQuestions={nbrQuestions} timer={timer} />
 		);

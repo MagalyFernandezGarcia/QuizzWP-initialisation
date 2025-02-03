@@ -15,18 +15,20 @@ const DisplayQuizzList = ({
 	const [currentPage, setCurrentPage] = useState(1);
 
 	useEffect(() => {
-		let ignore = false;
+		const fetchData = async () => {
+			let ignore = false;
 
-		fetchQuizzList(nbQuizzPerRequest, currentPage).then((result) => {
+			const result = await fetchQuizzList(nbQuizzPerRequest, currentPage);
 			if (!ignore) {
-				return;
+				setQuizzList(result);
 			}
-			setQuizzList((quizzList) => [...quizzList, ...result]);
-		});
 
-		return () => {
-			ignore = true;
+			return () => {
+				ignore = true;
+			};
 		};
+
+		fetchData();
 	}, [currentPage]);
 
 	const letsPlay = (id: number) => {
@@ -35,21 +37,19 @@ const DisplayQuizzList = ({
 
 	const displayQUizz = quizzList.map((quizz: QuizzList) => {
 		return (
-			<>
-				<div key={quizz.id} className="quizzContainer">
-					<img
-						src={quizz.image.guid}
-						alt={quizz.title.rendered}
-						className="quizzImage"
-					/>
-					<p className="title">{quizz.title.rendered}</p>
+			<div key={quizz.id} className="quizzContainer">
+				<img
+					src={quizz.image.guid}
+					alt={quizz.title.rendered}
+					className="quizzImage"
+				/>
+				<p className="title">{quizz.title.rendered}</p>
 
-					<button onClick={() => letsPlay(quizz.id)}>
-						{" "}
-						<Link to={`/quizz/${quizz.id}`}>Jouer</Link>
-					</button>
-				</div>
-			</>
+				<button onClick={() => letsPlay(quizz.id)}>
+					{" "}
+					<Link to={`/quizz/${quizz.id}`}>Jouer</Link>
+				</button>
+			</div>
 		);
 	});
 
@@ -59,7 +59,7 @@ const DisplayQuizzList = ({
 				<img className="logo" src="/wavingFlamingo.png" alt="waving flamingo" />
 				<h2 className="listTitle">Bienvenue sur Flamingo Quizz</h2>
 			</div>
-			<div className="quizzListContainer">{displayQUizz}</div>
+			<div className="quizzListContainer">{quizzList && displayQUizz}</div>
 			<button
 				className="moreBtn"
 				onClick={() => setCurrentPage(currentPage + 1)}
